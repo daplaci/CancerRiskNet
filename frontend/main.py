@@ -16,16 +16,16 @@ if uploaded_file is not None:
     st.write(df)
 
     assert set(df.columns) == set(['age', 'code', 'date'])
+
     d = {
-        "age":df.age.tolist(), 
-        "code":df.code.tolist(), 
-        "date":df.date.tolist()
+        "age": df.age.tolist(), 
+        "code": df.code.tolist(), 
+        "date": df.date.tolist()
     }
+
     print (f"requesting {json.dumps(d)}")
-    d = {
-	"age": [35, 43],
-	"code": ["D43", "D35"],
-	"date": [20220212, 20230101]
-    }
-    response = requests.post("http://0.0.0.0:8080/predict", json.dumps(d))
-    print (response)
+    
+    # IMPORTANT the address below works with the docker compose only
+    # it should be change to localhost if one wants to interactively run frontend and backend
+    response = requests.post("http://backend:8080/predict", json.dumps(d)) 
+    print (response.text)
