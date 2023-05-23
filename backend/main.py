@@ -1,19 +1,20 @@
 from fastapi import FastAPI
 import uvicorn
 from pydantic import BaseModel
+from typing import List
 
 class Events(BaseModel):
-    icd: str
-    date: str
-    age: int
+    icd: List[str]
+    date: List[str]
+    age: List[int]
 
 app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello Functions From Zero 2"}
+    return {"message": "Hello from PancNet"}
 
-@app.get("/predict")
+@app.post("/predict")
 async def pancnet_pred(events: Events):
     """make prediction form pancnet"""
     return events
