@@ -4,8 +4,8 @@ from pydantic import BaseModel
 from typing import List
 
 class Events(BaseModel):
-    icd: List[str]
-    date: List[str]
+    code: List[str]
+    date: List[int]
     age: List[int]
 
 app = FastAPI()
@@ -17,6 +17,7 @@ async def root():
 @app.post("/predict")
 async def pancnet_pred(events: Events):
     """make prediction form pancnet"""
+    print("Backend received request")
     return events
 
 if __name__ == '__main__':
