@@ -1,5 +1,5 @@
 
-FROM python:3.10.1-slim
+FROM python:3.10-slim
 
 WORKDIR /app
 
@@ -11,5 +11,3 @@ COPY . .
 EXPOSE 8501
 
 CMD ["streamlit", "run", "main.py"]
-
-touch 
