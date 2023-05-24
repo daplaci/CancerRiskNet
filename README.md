@@ -1,3 +1,5 @@
+[![Actions for PancNet](https://github.com/daplaci/CancerRiskNet/actions/workflows/main.yml/badge.svg)](https://github.com/daplaci/CancerRiskNet/actions/workflows/main.yml)
+
 # Pancreatic cancer risk predicted from disease trajectories using deep learning
 
 ## Introduction
