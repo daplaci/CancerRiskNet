@@ -12,25 +12,24 @@ from cancerrisknet.models.abstract_risk_model import AbstractRiskModel
 @RegisterModel("transformer")
 class Transformer(AbstractRiskModel):
     def __init__(self, args):
-
         super(Transformer, self).__init__(args)
 
         for layer in range(args.num_layers):
             transformer_layer = TransformerLayer(args)
-            self.add_module('transformer_layer_{}'.format(layer), transformer_layer)
+            self.add_module("transformer_layer_{}".format(layer), transformer_layer)
 
     def encode_trajectory(self, embed_x, batch=None):
         """
-            Computes a forward pass of the model.
+        Computes a forward pass of the model.
 
-            Returns:
-                The result of feeding the input through the model.
+        Returns:
+            The result of feeding the input through the model.
         """
 
         # Run through transformer
         seq_x = embed_x
         for indx in range(self.args.num_layers):
-            name = 'transformer_layer_{}'.format(indx)
+            name = "transformer_layer_{}".format(indx)
             seq_x = self._modules[name](seq_x)
         return seq_x
 

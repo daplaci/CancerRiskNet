@@ -60,9 +60,13 @@ def concordance_index(event_times, predicted_scores, event_observed=None):
     else:
         event_observed = np.asarray(event_observed, dtype=float).ravel()
         if event_observed.shape != event_times.shape:
-            raise ValueError("Observed events must be 1-dimensional of same length as event times")
+            raise ValueError(
+                "Observed events must be 1-dimensional of same length as event times"
+            )
 
-    num_correct, num_tied, num_pairs = _concordance_summary_statistics(event_times, predicted_scores, event_observed)
+    num_correct, num_tied, num_pairs = _concordance_summary_statistics(
+        event_times, predicted_scores, event_observed
+    )
 
     return _concordance_ratio(num_correct, num_tied, num_pairs)
 
@@ -148,11 +152,19 @@ def _concordance_summary_statistics(
         has_more_censored = censored_ix < len(censored_truth)
         has_more_died = died_ix < len(died_truth)
         # Should we look at some censored indices next, or died indices?
-        if has_more_censored and (not has_more_died or died_truth[died_ix] > censored_truth[censored_ix]):
-            pairs, correct, tied, next_ix = _handle_pairs(censored_truth, censored_pred, censored_ix, times_to_compare)
+        if has_more_censored and (
+            not has_more_died or died_truth[died_ix] > censored_truth[censored_ix]
+        ):
+            pairs, correct, tied, next_ix = _handle_pairs(
+                censored_truth, censored_pred, censored_ix, times_to_compare
+            )
             censored_ix = next_ix
-        elif has_more_died and (not has_more_censored or died_truth[died_ix] <= censored_truth[censored_ix]):
-            pairs, correct, tied, next_ix = _handle_pairs(died_truth, died_pred, died_ix, times_to_compare)
+        elif has_more_died and (
+            not has_more_censored or died_truth[died_ix] <= censored_truth[censored_ix]
+        ):
+            pairs, correct, tied, next_ix = _handle_pairs(
+                died_truth, died_pred, died_ix, times_to_compare
+            )
             for pred in died_pred[died_ix:next_ix]:
                 for time in observed_times:
                     times_to_compare[time].insert(pred[int(time)])

@@ -3,9 +3,8 @@ import torch.nn as nn
 from cancerrisknet.models.pools.factory import RegisterPool
 
 
-@RegisterPool('GlobalAvgPool')
+@RegisterPool("GlobalAvgPool")
 class GlobalAvgPool(nn.Module):
-
     def __init__(self, args):
         super(GlobalAvgPool, self).__init__()
 

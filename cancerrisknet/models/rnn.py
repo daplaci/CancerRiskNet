@@ -10,11 +10,10 @@ from cancerrisknet.models.factory import RegisterModel
 
 class AbstractRNN(AbstractRiskModel):
     """
-        The abstract risk model which embeds codes using a recurrent neural network (GRU or LSTM).
+    The abstract risk model which embeds codes using a recurrent neural network (GRU or LSTM).
     """
 
     def __init__(self, args):
-
         super(AbstractRNN, self).__init__(args)
 
         # Always use bidir RNNs
@@ -30,13 +29,25 @@ class AbstractRNN(AbstractRiskModel):
 class GRU(AbstractRNN):
     def __init__(self, args):
         super(GRU, self).__init__(args)
-        self.rnn = nn.GRU(input_size=args.hidden_dim, hidden_size=self.hidden_dim, num_layers=args.num_layers,
-                          bidirectional=True, batch_first=True, dropout=args.dropout)
+        self.rnn = nn.GRU(
+            input_size=args.hidden_dim,
+            hidden_size=self.hidden_dim,
+            num_layers=args.num_layers,
+            bidirectional=True,
+            batch_first=True,
+            dropout=args.dropout,
+        )
 
 
 @RegisterModel("lstm")
 class LSTM(AbstractRNN):
     def __init__(self, args):
         super(LSTM, self).__init__(args)
-        self.rnn = nn.LSTM(input_size=args.hidden_dim, hidden_size=self.hidden_dim, num_layers=args.num_layers,
-                           bidirectional=True, batch_first=True, dropout=args.dropout)
+        self.rnn = nn.LSTM(
+            input_size=args.hidden_dim,
+            hidden_size=self.hidden_dim,
+            num_layers=args.num_layers,
+            bidirectional=True,
+            batch_first=True,
+            dropout=args.dropout,
+        )

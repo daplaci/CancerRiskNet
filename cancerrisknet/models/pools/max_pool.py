@@ -3,7 +3,7 @@ import torch.nn as nn
 from cancerrisknet.models.pools.factory import RegisterPool
 
 
-@RegisterPool('GlobalMaxPool')
+@RegisterPool("GlobalMaxPool")
 class GlobalMaxPool(nn.Module):
     def __init__(self, args):
         super(GlobalMaxPool, self).__init__()
